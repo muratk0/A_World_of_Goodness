@@ -1,15 +1,22 @@
-import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import HomePage from './pages/HomePage';
 import './App.css';
 
 function App() {
   return (
-    <div>
-      <Navbar />
-      <main style={{ textAlign: 'center', marginTop: '50px' }}>
-        {/* Main content will go here */}
-      </main>
-    </div>
+    <Router>
+      <>
+        <header>
+          <Navbar />
+        </header>
+        <main>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+          </Routes>
+        </main>
+      </>
+    </Router>
   );
 }
 
