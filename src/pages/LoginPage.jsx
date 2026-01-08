@@ -1,78 +1,91 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const [activeTab, setActiveTab] = useState('login');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-  // Butona basıldığında çalışacak fonksiyonlar
-  const handleLogin = (e) => {
+  // --- KAYIT OLMA (Backend'e İstek Atar) ---
+  const handleRegister = async (e) => {
     e.preventDefault();
-    alert("Giriş yapma isteği gönderildi!");
-    // Arkadaşın servisleri bitirince buraya ekleme yapacak
+    console.log("Kayıt işlemi başlatılıyor..."); // Konsola yaz
+
+    const name = email.split('@')[0];
+
+    try {
+      // Backend adresine istek atıyoruz
+      const response = await fetch('http://localhost:3000/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password })
+      });
+
+      const result = await response.json();
+      console.log("Server Cevabı:", result); // Cevabı gör
+
+      if (result.success) {
+        alert("✅ Kayıt Başarılı! Veritabanına işlendi.");
+        setActiveTab('login');
+      } else {
+        alert("❌ Hata: " + result.message);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("⚠️ Server'a ulaşılamadı! Terminal açık mı?");
+    }
   };
 
-  const handleRegister = (e) => {
+  // --- GİRİŞ YAPMA ---
+  const handleLogin = async (e) => {
     e.preventDefault();
-    alert("Kayıt olma isteği gönderildi!");
+    try {
+      const response = await fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        alert("✅ Giriş Başarılı!");
+        localStorage.setItem('currentUser', JSON.stringify(result.user));
+        navigate('/donation');
+      } else {
+        alert("❌ Hata: " + result.message);
+      }
+    } catch (error) {
+      alert("⚠️ Bağlantı hatası!");
+    }
   };
 
   return (
     <div className="login-page">
       <div className="login-container">
-        <article className="login-box">
-          {/* Sekmeler */}
-          <header className="tabs">
-            <button 
-              className={`tab-btn ${activeTab === 'login' ? 'active' : ''}`} 
-              onClick={() => setActiveTab('login')}
-            >
-              Giriş Yap
-            </button>
-            <button 
-              className={`tab-btn ${activeTab === 'register' ? 'active' : ''}`} 
-              onClick={() => setActiveTab('register')}
-            >
-              Kaydol
-            </button>
-          </header>
+        <div className="login-box">
+          <div className="tabs">
+            <button className={`tab-btn ${activeTab === 'login' ? 'active' : ''}`} onClick={() => setActiveTab('login')}>Giriş Yap</button>
+            <button className={`tab-btn ${activeTab === 'register' ? 'active' : ''}`} onClick={() => setActiveTab('register')}>Kaydol</button>
+          </div>
 
-          {/* GİRİŞ YAP FORMU */}
-          {activeTab === 'login' && (
-            <form className="login-form" onSubmit={handleLogin}>
-              <div className="input-field">
-                <label>E-posta Adresi</label>
-                <div className="input-group">
-                  <input type="email" placeholder="E-postanızı giriniz" required />
-                </div>
+          <form className="login-form" onSubmit={activeTab === 'login' ? handleLogin : handleRegister}>
+            <div className="input-field">
+              <label>E-posta</label>
+              <div className="input-group">
+                <input type="email" placeholder="E-posta" required value={email} onChange={(e) => setEmail(e.target.value)} />
               </div>
-              <div className="input-field">
-                <label>Şifre</label>
-                <div className="input-group">
-                  <input type="password" placeholder="Şifrenizi giriniz" required />
-                </div>
+            </div>
+            <div className="input-field">
+              <label>Şifre</label>
+              <div className="input-group">
+                <input type="password" placeholder="Şifre" required value={password} onChange={(e) => setPassword(e.target.value)} />
               </div>
-              <button type="submit" className="btn-submit">Giriş Yap</button>
-            </form>
-          )}
-
-          {/* KAYDOL FORMU */}
-          {activeTab === 'register' && (
-            <form className="login-form" onSubmit={handleRegister}>
-              <div className="input-field">
-                <label>E-posta</label>
-                <div className="input-group">
-                  <input type="email" placeholder="E-posta" required />
-                </div>
-              </div>
-              <div className="input-field">
-                <label>Şifre</label>
-                <div className="input-group">
-                  <input type="password" placeholder="Şifre" required />
-                </div>
-              </div>
-              <button type="submit" className="btn-submit">Kayıt Ol</button>
-            </form>
-          )}
-        </article>
+            </div>
+            <button type="submit" className="btn-submit">{activeTab === 'login' ? 'Giriş Yap' : 'Kayıt Ol'}</button>
+          </form>
+        </div>
       </div>
     </div>
   );

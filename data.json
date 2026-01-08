@@ -1,0 +1,96 @@
+{
+  "users": [
+    {
+      "id": 1767895475915,
+      "name": "muratkilerci11",
+      "email": "muratkilerci11@hotmail.com",
+      "password": "murat00",
+      "history": [
+        {
+          "id": 1767896081566,
+          "date": "1/8/2026",
+          "productName": "Bag Donation",
+          "amount": 1
+        },
+        {
+          "id": 1767896107078,
+          "date": "1/8/2026",
+          "productName": "Boat Donation",
+          "amount": 1
+        },
+        {
+          "id": 1767896173754,
+          "date": "1/8/2026",
+          "productName": "Shoe Donation",
+          "amount": 1
+        }
+      ]
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "category": "BAG",
+      "title": "Bag Donation",
+      "price": "₺500.00",
+      "stock": 199,
+      "img": "/images/canta.png"
+    },
+    {
+      "id": 2,
+      "category": "SHOE",
+      "title": "Shoe Donation",
+      "price": "₺2300.00",
+      "stock": 149,
+      "img": "/images/ayakkabı.png"
+    },
+    {
+      "id": 3,
+      "category": "BOAT",
+      "title": "Boat Donation",
+      "price": "₺2000.00",
+      "stock": 149,
+      "img": "/images/bot.png"
+    },
+    {
+      "id": 4,
+      "category": "COAT",
+      "title": "Coat Donation",
+      "price": "₺1500.00",
+      "stock": 150,
+      "img": "/images/mont.png"
+    },
+    {
+      "id": 5,
+      "category": "NOTEBOOK",
+      "title": "Notebook Donation",
+      "price": "₺150.00",
+      "stock": 500,
+      "img": "/images/defter.png"
+    },
+    {
+      "id": 6,
+      "category": "COLERED PENCIL",
+      "title": "Colored Pencil Donation",
+      "price": "₺580.00",
+      "stock": 400,
+      "img": "/images/kalem.png"
+    },
+    {
+      "id": 7,
+      "category": "COLORING BOOK",
+      "title": "Coloring Book Donation",
+      "price": "₺70.00",
+      "stock": 300,
+      "img": "/images/boyama.png"
+    },
+    {
+      "id": 8,
+      "category": "BOOK",
+      "title": "Book Donation",
+      "price": "₺350.00",
+      "stock": 150,
+      "img": "/images/kitap.png"
+    }
+  ]
+}

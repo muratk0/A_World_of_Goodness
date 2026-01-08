@@ -1,35 +1,71 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DonationCard from '../components/DonationCard';
 
 const DonationPage = () => {
-  // Senin ürün listen (Dinamik olması için useState kullandık)
-  const [donations, setDonations] = useState([
-    { id: 1, category: "BAG", title: "Bag Donation", price: "₺500.00", stock: 200, img: "/images/canta.png" },
-    { id: 2, category: "SHOE", title: "Shoe Donation", price: "₺2300.00", stock: 150, img: "/images/ayakkabı.png" },
-    { id: 3, category: "BOAT", title: "Boat Donation", price: "₺2000.00", stock: 150, img: "/images/bot.png" },
-    { id: 4, category: "COAT", title: "Coat Donation", price: "₺1500.00", stock: 150, img: "/images/mont.png" },
-    { id: 5, category: "NOTEBOOK", title: "Notebook Donation", price: "₺150.00", stock: 500, img: "/images/defter.png" },
-    { id: 6, category: "COLERED PENCIL", title: "Colored Pencil Donation", price: "₺580.00", stock: 400, img: "/images/kalem.png" },
-    { id: 7, category: "COLORING BOOK", title: "Coloring Book Donation", price: "₺70.00", stock: 300, img: "/images/boyama.png" },
-    { id: 8, category: "BOOK", title: "Book Donation", price: "₺350.00", stock: 150, img: "/images/kitap.png" }
-  ]);
+  // Başlangıçta liste boş, Server'dan gelince dolacak
+  const [donations, setDonations] = useState([]);
 
-  const handleAid = (id) => {
-    // Şimdilik sadece frontend'de stoğu düşürüyoruz. 
-    // Arkadaşın 'services' kodunu bitirince buraya ekleme yapacak.
-    setDonations(donations.map(item => 
-      item.id === id ? { ...item, stock: item.stock - 1 } : item
-    ));
-    alert("Bağışınız için teşekkürler!");
+  // 1. Sayfa Açılınca: Server'a git, ürünleri getir (GET)
+  useEffect(() => {
+    fetch('http://localhost:3000/products')
+      .then(res => res.json())
+      .then(data => setDonations(data)) // Gelen veriyi hafızaya at
+      .catch(err => console.error("Ürünler çekilemedi:", err));
+  }, []);
+
+  // 2. Bağış Butonuna Basınca: Server'a bildir (POST)
+  const handleAid = async (productId) => {
+    // Önce giriş yapmış mı diye bakıyoruz
+    const storedUser = localStorage.getItem('currentUser');
+    
+    if (!storedUser) {
+      alert("⚠️ Bağış yapmak için önce GİRİŞ YAPMALISIN!");
+      return; // Giriş yoksa işlemi durdur
+    }
+    
+    const user = JSON.parse(storedUser);
+
+    try {
+      // Backend'e istek atıyoruz: "Bu kişi, şu üründen 1 tane aldı"
+      const response = await fetch('http://localhost:3000/donate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId: user.id, productId, amount: 1 })
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        alert("❤️ Bağışınız alındı! Allah kabul etsin.");
+        
+        // Sayfayı yenilemeden ekrandaki stok sayısını güncelle
+        setDonations(prev => prev.map(item => 
+          item.id === productId ? { ...item, stock: result.newStock } : item
+        ));
+      } else {
+        alert("Hata: " + result.message);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Sunucuyla bağlantı koptu!");
+    }
   };
 
   return (
     <main className="donation">
       <h1>Donation Page</h1>
       <section className="box-container">
-        {donations.map(item => (
-          <DonationCard key={item.id} item={item} onAidClick={handleAid} />
-        ))}
+        {/* Eğer ürünler geldiyse listele, gelmediyse 'Yükleniyor' yaz */}
+        {donations.length > 0 ? (
+          donations.map(item => (
+            <DonationCard key={item.id} item={item} onAidClick={handleAid} />
+          ))
+        ) : (
+          <p style={{textAlign:'center', fontSize: '1.2rem'}}>
+            Ürünler yükleniyor... <br/>
+            <span style={{fontSize:'0.8rem'}}>(Görünmüyorsa server kapalı olabilir)</span>
+          </p>
+        )}
       </section>
     </main>
   );
