@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';     // (Eğer bu dosya varsa)
 import DonationPage from './pages/DonationPage'; // (Eğer bu dosya varsa)
 import LoginPage from './pages/LoginPage';   // YENİ EKLEDİĞİMİZ SAYFA
 import './App.css'; // Veya './index.css' hangisini kullanıyorsan
+import EventsPage from './pages/EventsPage';
 
 function App() {
   return (
@@ -22,12 +23,11 @@ function App() {
             
             {/* Bağış Sayfası */}
             <Route path="/donation" element={<DonationPage />} />
-            
-            {/* Etkinlikler (Geçici) */}
-            <Route path="/events" element={<div style={{textAlign:'center', padding:'50px'}}>Events Page (Yakında)</div>} />
+          
             
             {/* Giriş Sayfası - ARTIK GERÇEK SAYFAYA BAĞLI */}
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/events" element={<EventsPage />} />
           </Routes>
         </main>
       </div>
