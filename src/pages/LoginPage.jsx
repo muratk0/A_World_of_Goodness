@@ -1,19 +1,26 @@
 import React, { useState } from 'react';
-// DİKKAT: Navbar importunu buradan kaldırdık çünkü App.jsx zaten yönetiyor.
 
 const LoginPage = () => {
-  // Hangi tabın (Giriş veya Kayıt) aktif olduğunu tutan state
   const [activeTab, setActiveTab] = useState('login');
+
+  // Butona basıldığında çalışacak fonksiyonlar
+  const handleLogin = (e) => {
+    e.preventDefault();
+    alert("Giriş yapma isteği gönderildi!");
+    // Arkadaşın servisleri bitirince buraya ekleme yapacak
+  };
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    alert("Kayıt olma isteği gönderildi!");
+  };
 
   return (
     <div className="login-page">
-      {/* Navbar BURADAN SİLİNDİ */}
-
       <div className="login-container">
-        <div className="login-box">
-          
-          {/* SEKMELER (Giriş Yap / Kaydol Butonları) */}
-          <div className="tabs">
+        <article className="login-box">
+          {/* Sekmeler */}
+          <header className="tabs">
             <button 
               className={`tab-btn ${activeTab === 'login' ? 'active' : ''}`} 
               onClick={() => setActiveTab('login')}
@@ -26,11 +33,11 @@ const LoginPage = () => {
             >
               Kaydol
             </button>
-          </div>
+          </header>
 
           {/* GİRİŞ YAP FORMU */}
           {activeTab === 'login' && (
-            <form className="login-form" id="login-form">
+            <form className="login-form" onSubmit={handleLogin}>
               <div className="input-field">
                 <label>E-posta Adresi</label>
                 <div className="input-group">
@@ -47,9 +54,9 @@ const LoginPage = () => {
             </form>
           )}
 
-          {/* KAYDOL FORMU (Sadece Mail ve Şifre) */}
+          {/* KAYDOL FORMU */}
           {activeTab === 'register' && (
-            <form className="login-form" id="register-form">
+            <form className="login-form" onSubmit={handleRegister}>
               <div className="input-field">
                 <label>E-posta</label>
                 <div className="input-group">
@@ -65,8 +72,7 @@ const LoginPage = () => {
               <button type="submit" className="btn-submit">Kayıt Ol</button>
             </form>
           )}
-          
-        </div>
+        </article>
       </div>
     </div>
   );
