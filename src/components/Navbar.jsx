@@ -1,17 +1,21 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
     return (
-        <nav className="navbar">
+        
+        <header className="navbar">
 
-            <div className="nav-left">
+            
+            <nav className="nav-left">
+                {/* 3. Link kullanımı: Sayfa yenilenmeden geçiş sağlar */}
                 <Link to="/" id="home_page">Home</Link>
-                <a href="#" id="aid_page">Donation</a>
-                <a href="#" id="event_page">Events</a>
-            </div>
+                
+                {/* 4. 'a href' yerine 'Link to' yaparak router'a bağladık */}
+                <Link to="/donation" id="aid_page">Donation</Link>
+                <Link to="/events" id="event_page">Events</Link>
+            </nav>
 
             <div className="center">
                 <img src="/images/logo.jpg" alt="Logo" className="logo" />
@@ -19,10 +23,11 @@ const Navbar = () => {
             </div>
 
             <div className="nav-right">
-                <a href="#" id="login_register">Log In</a>
+                {/* 5. Login linkini de router'a bağladık */}
+                <Link to="/login" id="login_register">Log In</Link>
             </div>
 
-        </nav>
+        </header>
     );
 };
 
