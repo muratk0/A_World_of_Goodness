@@ -1,51 +1,60 @@
-import React from 'react';
-
-import { Link } from 'react-router-dom';
-
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Navbar.css';
 
-
-
 const Navbar = () => {
+    const [user, setUser] = useState(null);
+    const navigate = useNavigate();
+    const location = useLocation(); // Sayfa değişimini anlık yakalamak için
+
+    // Sayfa her değiştiğinde (veya ilk açıldığında) giriş yapılmış mı kontrol et
+    useEffect(() => {
+        const storedUser = localStorage.getItem('currentUser');
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        } else {
+            setUser(null);
+        }
+    }, [location]);
+
+    // Çıkış yap butonuna basılınca çalışacak fonksiyon
+    const handleLogout = () => {
+        localStorage.removeItem('currentUser'); // Hafızadan sil
+        setUser(null); // State'i sıfırla
+        navigate('/login'); // Giriş sayfasına yönlendir
+        alert("Başarıyla çıkış yapıldı.");
+    };
 
     return (
-
         <header className="navbar">
-
             <nav className="nav-left">
-
                 <Link to="/" id="home_page">Home</Link>
-
                 <Link to="/donation" id="aid_page">Donation</Link>
-
                 <Link to="/events" id="event_page">Events</Link>
-
             </nav>
 
-
-
             <div className="center">
-
                 <img src="/images/logo.jpg" alt="Logo" className="logo" />
-
                 <span>A WORD OF GOODNESS</span>
-
             </div>
-
-
 
             <div className="nav-right">
-
-                <Link to="/login" id="login_register">Log In</Link>
-
+                {user ? (
+                    /* Kullanıcı varsa: Çıkış Yap (Logout) göster */
+                    <span 
+                        onClick={handleLogout} 
+                        id="logout_btn" 
+                        style={{ cursor: 'pointer', fontWeight: 'bold', textDecoration: 'none', color: 'inherit' }}
+                    >
+                        Logout
+                    </span>
+                ) : (
+                    /* Kullanıcı yoksa: Giriş Yap (Log In) göster */
+                    <Link to="/login" id="login_register">Log In</Link>
+                )}
             </div>
-
         </header>
-
     );
-
 };
-
-
 
 export default Navbar;

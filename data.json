@@ -23,6 +23,18 @@
           "date": "1/8/2026",
           "productName": "Shoe Donation",
           "amount": 1
+        },
+        {
+          "id": 1767978458777,
+          "date": "1/9/2026",
+          "productName": "Bag Donation",
+          "amount": 1
+        },
+        {
+          "id": 1767978481246,
+          "date": "1/9/2026",
+          "productName": "Bag Donation",
+          "amount": 1
         }
       ]
     },
@@ -111,6 +123,13 @@
           "amount": 1
         }
       ]
+    },
+    {
+      "id": 1767978502213,
+      "name": "test1",
+      "email": "test1@test.com",
+      "password": "123",
+      "history": []
     }
   ],
   "products": [
@@ -119,7 +138,7 @@
       "category": "BAG",
       "title": "Bag Donation",
       "price": "₺500.00",
-      "stock": 194,
+      "stock": 192,
       "img": "/images/canta.png"
     },
     {
