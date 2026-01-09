@@ -53,7 +53,14 @@ const DonationPage = () => {
 
   return (
     <main className="donation">
-      <h1>Donation Page</h1>
+     
+      <div className="page-header">
+        <h2>Extend a Helping Hand</h2>
+        <p>
+          A small donation can trigger a big change. All collected aid is 
+          transparently delivered directly to those in need.
+        </p>
+      </div>
       <section className="box-container">
         {/* Eğer ürünler geldiyse listele, gelmediyse 'Yükleniyor' yaz */}
         {donations.length > 0 ? (

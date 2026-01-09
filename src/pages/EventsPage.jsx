@@ -14,7 +14,14 @@ const EventsPage = () => {
 
   return (
     <main className="donation">
-      <h1>Etkinlikler</h1>
+      <div className="page-header">
+        <h2>Etkinliklerimize Katılın</h2>
+        <p>
+          Topluluğumuzu güçlendirmek ve birlikte öğrenmek için düzenlediğimiz 
+          atölye çalışmalarını, yardım buluşmalarını ve sosyal etkinlikleri buradan takip edebilirsiniz.
+        </p>
+      </div>
+      
       <section className="box-container">
         {events.map(event => (
           // Artık fonksiyona gerek yok, sadece veriyi gönderiyoruz

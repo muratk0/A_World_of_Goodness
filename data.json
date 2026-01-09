@@ -25,6 +25,50 @@
           "amount": 1
         }
       ]
+    },
+    {
+      "id": 1767956118659,
+      "name": "aycakodak",
+      "email": "aycakodak@gmail.com",
+      "password": "12345",
+      "history": [
+        {
+          "id": 1767956130756,
+          "date": "09.01.2026",
+          "productName": "Shoe Donation",
+          "amount": 1
+        },
+        {
+          "id": 1767956278481,
+          "date": "09.01.2026",
+          "productName": "Colored Pencil Donation",
+          "amount": 1
+        },
+        {
+          "id": 1767957037179,
+          "date": "09.01.2026",
+          "productName": "Shoe Donation",
+          "amount": 1
+        },
+        {
+          "id": 1767958922873,
+          "date": "09.01.2026",
+          "productName": "Shoe Donation",
+          "amount": 1
+        },
+        {
+          "id": 1767959414738,
+          "date": "09.01.2026",
+          "productName": "Shoe Donation",
+          "amount": 1
+        },
+        {
+          "id": 1767961182351,
+          "date": "09.01.2026",
+          "productName": "Shoe Donation",
+          "amount": 1
+        }
+      ]
     }
   ],
   "products": [
@@ -41,7 +85,7 @@
       "category": "SHOE",
       "title": "Shoe Donation",
       "price": "₺2300.00",
-      "stock": 149,
+      "stock": 144,
       "img": "/images/ayakkabı.png"
     },
     {
@@ -73,7 +117,7 @@
       "category": "COLERED PENCIL",
       "title": "Colored Pencil Donation",
       "price": "₺580.00",
-      "stock": 400,
+      "stock": 399,
       "img": "/images/kalem.png"
     },
     {
