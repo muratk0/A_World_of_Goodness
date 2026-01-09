@@ -1,32 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import DonationCard from '../components/DonationCard';
+import PaymentModal from '../components/PaymentModal'; // Modal'ı ekledik
 
 const DonationPage = () => {
-  // Başlangıçta liste boş, Server'dan gelince dolacak
   const [donations, setDonations] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
 
-  // 1. Sayfa Açılınca: Server'a git, ürünleri getir (GET)
   useEffect(() => {
     fetch('http://localhost:3000/products')
       .then(res => res.json())
-      .then(data => setDonations(data)) // Gelen veriyi hafızaya at
+      .then(data => setDonations(data))
       .catch(err => console.error("Ürünler çekilemedi:", err));
   }, []);
 
-  // 2. Bağış Butonuna Basınca: Server'a bildir (POST)
-  const handleAid = async (productId) => {
-    // Önce giriş yapmış mı diye bakıyoruz
+  // "Aid" butonuna basınca modal'ı açar
+  const openPaymentModal = (productId) => {
     const storedUser = localStorage.getItem('currentUser');
-    
     if (!storedUser) {
-      alert("⚠️ Bağış yapmak için önce GİRİŞ YAPMALISIN!");
-      return; // Giriş yoksa işlemi durdur
+      alert("⚠️ Please LOG IN to make a donation!");
+      return;
     }
-    
-    const user = JSON.parse(storedUser);
+    const item = donations.find(d => d.id === productId);
+    setSelectedItem(item);
+    setIsModalOpen(true);
+  };
+
+  // Modal içindeki "Confirm" butonuna basınca çalışır
+  const handleFinalDonation = async (productId) => {
+    const user = JSON.parse(localStorage.getItem('currentUser'));
 
     try {
-      // Backend'e istek atıyoruz: "Bu kişi, şu üründen 1 tane aldı"
       const response = await fetch('http://localhost:3000/donate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -36,44 +40,42 @@ const DonationPage = () => {
       const result = await response.json();
 
       if (result.success) {
-        alert("❤️ Bağışınız alındı! Allah kabul etsin.");
+        alert("❤️ Donation successful! May Allah reward you.");
+        setIsModalOpen(false); // Modal'ı kapat
         
-        // Sayfayı yenilemeden ekrandaki stok sayısını güncelle
         setDonations(prev => prev.map(item => 
           item.id === productId ? { ...item, stock: result.newStock } : item
         ));
       } else {
-        alert("Hata: " + result.message);
+        alert("Error: " + result.message);
       }
     } catch (error) {
-      console.error(error);
-      alert("Sunucuyla bağlantı koptu!");
+      alert("Connection to server lost!");
     }
   };
 
   return (
     <main className="donation">
-     
       <div className="page-header">
-        <h2>Extend a Helping Hand</h2>
-        <p>
-          A small donation can trigger a big change. All collected aid is 
-          transparently delivered directly to those in need.
-        </p>
+        <h1>Extend a Helping Hand</h1>
+        <p>A small donation can trigger a big change.</p>
       </div>
+
       <section className="box-container">
-        {/* Eğer ürünler geldiyse listele, gelmediyse 'Yükleniyor' yaz */}
-        {donations.length > 0 ? (
-          donations.map(item => (
-            <DonationCard key={item.id} item={item} onAidClick={handleAid} />
-          ))
-        ) : (
-          <p style={{textAlign:'center', fontSize: '1.2rem'}}>
-            Ürünler yükleniyor... <br/>
-            <span style={{fontSize:'0.8rem'}}>(Görünmüyorsa server kapalı olabilir)</span>
-          </p>
-        )}
+        {donations.map(item => (
+          <DonationCard key={item.id} item={item} onAidClick={openPaymentModal} />
+        ))}
       </section>
+
+      {/* Payment Modal Bileşeni */}
+      {selectedItem && (
+        <PaymentModal 
+          isOpen={isModalOpen} 
+          onClose={() => setIsModalOpen(false)} 
+          onConfirm={handleFinalDonation}
+          item={selectedItem}
+        />
+      )}
     </main>
   );
 };
