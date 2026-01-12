@@ -7,15 +7,28 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  // --- KAYIT OLMA (Backend'e İstek Atar) ---
+  // --- KAYIT OLMA ---
   const handleRegister = async (e) => {
     e.preventDefault();
-    console.log("Kayıt işlemi başlatılıyor..."); // Konsola yaz
+
+    // 1. E-posta Kontrolü (Zaten vardı)
+    if (!email.includes('@') || !email.includes('.')) {
+        alert("Please enter a valid email address! (@ and . symbols are missing)");
+        return; 
+    }
+
+   
+    // Eğer şifre 6 karakterden kısaysa uyarı ver ve işlemi durdur.
+    if (password.length < 6) {
+        alert("Şifre en az 6 karakter olmalıdır!");
+        return; 
+    }
+
+    console.log("Kayıt işlemi başlatılıyor..."); 
 
     const name = email.split('@')[0];
 
     try {
-      // Backend adresine istek atıyoruz
       const response = await fetch('http://localhost:3000/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -23,7 +36,7 @@ const LoginPage = () => {
       });
 
       const result = await response.json();
-      console.log("Server Cevabı:", result); // Cevabı gör
+      console.log("Server Cevabı:", result); 
 
       if (result.success) {
         alert("✅ Kayıt Başarılı! Veritabanına işlendi.");
@@ -40,6 +53,14 @@ const LoginPage = () => {
   // --- GİRİŞ YAPMA ---
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    // Giriş yaparken de mail formatı kontrolü
+    if (!email.includes('@') || !email.includes('.')) {
+        alert("Please enter a valid email address! (@ and . symbols are missing)");
+        return; 
+    }
+    
+
     try {
       const response = await fetch('http://localhost:3000/login', {
         method: 'POST',
@@ -74,13 +95,25 @@ const LoginPage = () => {
             <div className="input-field">
               <label>E-posta</label>
               <div className="input-group">
-                <input type="email" placeholder="E-posta" required value={email} onChange={(e) => setEmail(e.target.value)} />
+                <input 
+                    type="email" 
+                    placeholder="E-posta" 
+                    required 
+                    value={email} 
+                    onChange={(e) => setEmail(e.target.value)} 
+                />
               </div>
             </div>
             <div className="input-field">
               <label>Şifre</label>
               <div className="input-group">
-                <input type="password" placeholder="Şifre" required value={password} onChange={(e) => setPassword(e.target.value)} />
+                <input 
+                    type="password" 
+                    placeholder="Şifre" 
+                    required 
+                    value={password} 
+                    onChange={(e) => setPassword(e.target.value)} 
+                />
               </div>
             </div>
             <button type="submit" className="btn-submit">{activeTab === 'login' ? 'Giriş Yap' : 'Kayıt Ol'}</button>
