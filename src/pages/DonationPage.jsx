@@ -40,7 +40,7 @@ const DonationPage = () => {
       const result = await response.json();
 
       if (result.success) {
-        alert("❤️ Donation successful! May Allah reward you.");
+        alert("❤️ Donation successful! ");
         setIsModalOpen(false); // Modal'ı kapat
         
         setDonations(prev => prev.map(item => 
