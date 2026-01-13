@@ -2,12 +2,12 @@
 
 This project is a full-stack web application designed to facilitate donations and aid distribution. It features a React-based frontend for user interaction and a Node.js/Express backend that manages user authentication, product stocks, and transaction history using a JSON-based database.
 
-## 🔗 Repository Link
+##  Repository Link
 **GitHub Repository:** [https://github.com/muratk0/A_World_of_Goodness]
 
 ---
 
-## 🚀 Features
+##  Features
 
 ### Frontend (React + Vite)
 - **Dynamic Routing:** Seamless navigation between pages using `react-router-dom`.
@@ -33,7 +33,7 @@ This project is a full-stack web application designed to facilitate donations an
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 The project is structured as a monorepo containing both client and server logic.
 
