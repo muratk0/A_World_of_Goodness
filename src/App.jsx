@@ -12,7 +12,7 @@ import LoginPage from './pages/LoginPage';   // YENİ EKLEDİĞİMİZ SAYFA
 
 import TransactionHistoryPage from './pages/TransactionHistoryPage';
 
-import './App.css'; // Veya './index.css' hangisini kullanıyorsan
+// import './App.css'; // REMOVED: Styles consolidated in index.css
 
 import EventsPage from './pages/EventsPage';
 

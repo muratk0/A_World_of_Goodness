@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import './Navbar.css';
+// import './Navbar.css'; // REMOVED: Styles consolidated in index.css
 
 
 //Navbar! Şu an adres çubuğunda ne yazıyor (URL ne)? /login mi, /home mu? Bana anlık olarak haber ver
@@ -10,7 +10,7 @@ const Navbar = () => {
     const location = useLocation(); // Sayfa değişimini anlık yakalamak için
 
     // Sayfa her değiştiğinde (veya ilk açıldığında) giriş yapılmış mı kontrol et
-  
+
     useEffect(() => {
         const storedUser = localStorage.getItem('currentUser');
         if (storedUser) {
@@ -36,7 +36,7 @@ const Navbar = () => {
                 <Link to="/donation" id="aid_page">Donation</Link>
                 <Link to="/events" id="event_page">Events</Link>
             </nav>
-            
+
             <div className="center">
                 <img src="/images/logo.jpg" alt="Logo" className="logo" />
                 <span>A WORD OF GOODNESS</span>

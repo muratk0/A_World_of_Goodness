@@ -139,6 +139,12 @@
           "date": "09.01.2026",
           "productName": "Bag Donation",
           "amount": 1
+        },
+        {
+          "id": 1768315507091,
+          "date": "13.01.2026",
+          "productName": "Notebook Donation",
+          "amount": 1
         }
       ]
     },
@@ -178,6 +184,12 @@
           "date": "13.01.2026",
           "productName": "Shoe Donation",
           "amount": 1
+        },
+        {
+          "id": 1768313238390,
+          "date": "13.01.2026",
+          "productName": "Bag Donation",
+          "amount": 1
         }
       ]
     }
@@ -188,7 +200,7 @@
       "category": "BAG",
       "title": "Bag Donation",
       "price": "₺500.00",
-      "stock": 191,
+      "stock": 190,
       "img": "/images/canta.png"
     },
     {
@@ -220,7 +232,7 @@
       "category": "NOTEBOOK",
       "title": "Notebook Donation",
       "price": "₺150.00",
-      "stock": 499,
+      "stock": 498,
       "img": "/images/defter.png"
     },
     {
