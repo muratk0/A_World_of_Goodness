@@ -1,16 +1,54 @@
-# React + Vite
+# A World of Goodness - Donation & Aid Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a full-stack web application designed to facilitate donations and aid distribution. It features a React-based frontend for user interaction and a Node.js/Express backend that manages user authentication, product stocks, and transaction history using a JSON-based database.
 
-Currently, two official plugins are available:
+## 🔗 Repository Link
+**GitHub Repository:** [https://github.com/muratk0/A_World_of_Goodness]
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Frontend (React + Vite)
+- **Dynamic Routing:** Seamless navigation between pages using `react-router-dom`.
+- **User Authentication:** Login and Registration forms.
+- **Donation System:** Interactive donation cards where users can donate to specific causes.
+- **Transaction History:** Users can view their past donations.
+- **Responsive Design:** Includes a persistent Navbar and responsive layout.
 
-## Expanding the ESLint configuration
+### Backend (Node.js + Express)
+- **RESTful API:** Endpoints for users, products, and transactions.
+- **Data Persistence:** Uses `data.json` as a lightweight database (managed via File System `fs`).
+- **Stock Management:** Automatically decrements campaign goals/stocks upon donation.
+- **CORS Enabled:** Secure communication between the frontend (Vite) and backend (Express).
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠 Tech Stack
+
+* **Frontend:** React, Vite, React Router DOM, CSS
+* **Backend:** Node.js, Express.js
+* **Database:** JSON (Local File System)
+* **Tools:** ESLint, npm
+
+---
+
+## 📂 Project Structure
+
+The project is structured as a monorepo containing both client and server logic.
+
+```text
+aidproje/
+├── public/                 # Static assets
+├── src/
+│   ├── assets/             # Images and SVGs
+│   ├── components/         # Reusable UI components (Navbar, DonationCard, etc.)
+│   ├── pages/              # Page views (HomePage, DonationPage, LoginPage, etc.)
+│   ├── App.jsx             # Main application routing logic
+│   ├── main.jsx            # React entry point
+│   └── index.css           # Global styles
+├── data.json               # Database file (Users & Products)
+├── server.js               # Backend API server entry point
+├── package.json            # Project dependencies and scripts
+├── vite.config.js          # Vite configuration
+└── README.md               # Project documentation

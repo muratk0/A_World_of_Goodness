@@ -1,50 +1,51 @@
-import express from 'express';
+import express from 'express';  //sunucuyu kurar
 
-import cors from 'cors';
+import cors from 'cors';  //farklı port olan 3000 ve 5173 lerin birbiriyşe konuşmasını sağlar
 
-import fs from 'fs';
-
+import fs from 'fs';  
+                     //fs ve path data.jsondan veri okuyup yazmaya yarıyor
 import path from 'path';
 
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'url';   // urlimiz bilgisayar formatına çevirir pc okuyabilsin diye
 
 
 
 // __dirname modern javascript'te olmadığı için onu böyle tanımlıyoruz
 
-const __filename = fileURLToPath(import.meta.url);
+const __filename = fileURLToPath(import.meta.url);  //çalışan dosya adreini gösterir C:\Proje\server.js gibi
 
-const __dirname = path.dirname(__filename);
-
-
-
-const app = express();
-
-const PORT = 3000;
-
-const DB_FILE = path.join(__dirname, 'data.json');
+const __dirname = path.dirname(__filename); 
 
 
 
-app.use(cors());
+const app = express(); // Ne yapıyor: express kütüphanesini çalıştırıp, bize app adında canlı bir Sunucu Uygulaması (Server Application) veriyor.
 
-app.use(express.json());
+const PORT = 3000;  //sunucunun hangi porttan çalışacağını belirledik
+
+const DB_FILE = path.join(__dirname, 'data.json');  //data.jsonın hangi kalsörde oldunu söylüyor karışıklığa karşı
+
+
+
+app.use(cors());  // 3000 ile 5117 gibi iki sunucu arası veri akışına izin verdik güvenli dedik
+
+app.use(express.json());  //gelen verileri .json formatına çeviriyor mail-şifre vs yeni bilgileri
 
 
 
 // --- OKUMA / YAZMA FONKSİYONLARI ---
 
-const readData = () => {
+const readData = () => {  //data.jsondan verilleri okuyan bir fonksiyon tanımladık
 
     try {
 
-        const fileContent = fs.readFileSync(DB_FILE, 'utf8');
+        const fileContent = fs.readFileSync(DB_FILE, 'utf8');  //db_file değişkenindeki dosyayı okuyor
 
-        return JSON.parse(fileContent);
+        return JSON.parse(fileContent);  //string olan mail vs bilgileri bilgisyar formatına çeviriyoruz
 
     } catch (err) {
 
-        return { users: [], products: [] };
+        return { users: [], products: [] };  //hata verirse try içinde kod boş bir kullanıcı çevirisn
+                                             // kod dönüp durmasın diye
 
     }
 
@@ -64,11 +65,11 @@ const writeData = (data) => {
 
 // 1. Ürünleri Listele
 
-app.get('/products', (req, res) => {
+app.get('/products', (req, res) => {  
 
-    const data = readData();
+    const data = readData();    //bu kod bloğu productstaki ürünleri okuyup müşteriye gösteriyor    
 
-    res.json(data.products);
+    res.json(data.products);   
 
 });
 
@@ -78,13 +79,13 @@ app.get('/products', (req, res) => {
 
 app.post('/register', (req, res) => {
 
-    console.log("Kayıt isteği geldi:", req.body); // Terminalde görmek için
+    console.log("Kayıt isteği geldi:", req.body); 
 
 
 
     const { name, email, password } = req.body;
 
-    const data = readData();
+    const data = readData();          //eski kullancılar silinmesin diye okuyor önce data.jsonu
 
 
 
@@ -114,7 +115,7 @@ app.post('/register', (req, res) => {
 
     data.users.push(newUser);
 
-    writeData(data);
+    writeData(data);        //yeni kullanıcıyı data.jsona push yapıp yazdırıyor data.jsona
 
 
 
