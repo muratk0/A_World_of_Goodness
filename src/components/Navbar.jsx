@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+//use state hafıza şuan kim log in yapmış
+//use effect mesela sayfa değiştiğinde devreye girer 
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-// import './Navbar.css'; // REMOVED: Styles consolidated in index.css
+//useNavigate kullanıcıyı zorla götürür mesela üye oldun git bağıl yap
 
 
 //Navbar! Şu an adres çubuğunda ne yazıyor (URL ne)? /login mi, /home mu? Bana anlık olarak haber ver
@@ -23,7 +25,7 @@ const Navbar = () => {
     // Çıkış yap butonuna basılınca çalışacak fonksiyon
     const handleLogout = () => {
         localStorage.removeItem('currentUser'); // Hafızadan sil
-        setUser(null); // State'i sıfırla
+        setUser(null); // navbarı sıfırla
         navigate('/login'); // Giriş sayfasına yönlendir
         alert("Başarıyla çıkış yapıldı.");
     };
@@ -65,3 +67,7 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+//Sürekli Kontrol: Sayfa her değiştiğinde Giriş yapıldı mı? diye bakar (useEffect)
+//Karar Verir: Giriş yapılmışsa sağ üstte ismini ve çıkış butonunu gösterir; yapılmamışsa "Log In" butonunu gösterir.
+//Yönlendirir: Linklere tıklandığında sayfayı yenilemeden diğer sayfalara geçişi sağlar.

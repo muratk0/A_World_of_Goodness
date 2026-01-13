@@ -1,18 +1,19 @@
 import React from 'react';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+//router sayfanın akışını güzelleştiriyo yenilenmeden sayfa akıyo
 
 import Navbar from './components/Navbar';
 
-import HomePage from './pages/HomePage';     // (Eğer bu dosya varsa)
+import HomePage from './pages/HomePage';     
 
-import DonationPage from './pages/DonationPage'; // (Eğer bu dosya varsa)
+import DonationPage from './pages/DonationPage'; 
 
-import LoginPage from './pages/LoginPage';   // YENİ EKLEDİĞİMİZ SAYFA
+import LoginPage from './pages/LoginPage';   
 
 import TransactionHistoryPage from './pages/TransactionHistoryPage';
 
-// import './App.css'; // REMOVED: Styles consolidated in index.css
+
 
 import EventsPage from './pages/EventsPage';
 
@@ -74,6 +75,6 @@ function App() {
 
 }
 
-
-
+//yani app js de sayfanın akışının iyi olması sayfanın yenilenmemesini ve navbarın sabit kalmasını diğerlerinin tıkladığımızda açılmasını sağladık
+//navbarı router üstüne yazdık ki hep o her sayfada olsun
 export default App;

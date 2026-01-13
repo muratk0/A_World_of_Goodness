@@ -145,6 +145,12 @@
           "date": "13.01.2026",
           "productName": "Notebook Donation",
           "amount": 1
+        },
+        {
+          "id": 1768315703933,
+          "date": "13.01.2026",
+          "productName": "Shoe Donation",
+          "amount": 1
         }
       ]
     },
@@ -208,7 +214,7 @@
       "category": "SHOE",
       "title": "Shoe Donation",
       "price": "₺2300.00",
-      "stock": 138,
+      "stock": 137,
       "img": "/images/ayakkabı.png"
     },
     {

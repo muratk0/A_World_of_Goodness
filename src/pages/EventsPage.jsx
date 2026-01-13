@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import EventCard from '../components/EventCard';
 
 const EventsPage = () => {
-  // We removed the quota, added random locations instead
+  
+  // Sunucudan istemiyoruz, veriler zaten elimizde
+
   const [events] = useState([
     { 
       id: 1, 
@@ -72,7 +74,9 @@ const EventsPage = () => {
       
       <section className="box-container">
         {events.map(event => (
-          // No function needed anymore, just passing data
+          // Her bir etkinlik verisi için bir tane KART (EventCard) bas.
+     // 'key': Sıra numarası (React karıştırmasın diye).
+     // 'event': Kartın üzerine yazılacak bilgilerin tamamı.
           <EventCard key={event.id} event={event} />
         ))}
       </section>

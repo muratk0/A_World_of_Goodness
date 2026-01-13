@@ -2,20 +2,20 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
-  const [activeTab, setActiveTab] = useState('login');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState('login');//hangi sekmedeyiz giriş mi kayot ol mu
+  const [email, setEmail] = useState(''); //kullanıcının yazdığı email
+  const [password, setPassword] = useState('');//// Kullanıcının yazdığı şifre
+  const navigate = useNavigate(); 
 
   // --- KAYIT OLMA ---
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    // 1. E-posta Kontrolü (Zaten vardı)
+    // 1. E-posta Kontrolü doğru bi şekilde mi eposta girdi
     if (!email.includes('@') || !email.includes('.')) {
         alert("Please enter a valid email address! (@ and . symbols are missing)");
         return; 
-    }
+    } 
 
    
     // Eğer şifre 6 karakterden kısaysa uyarı ver ve işlemi durdur.
@@ -30,9 +30,9 @@ const LoginPage = () => {
 
     try {
       const response = await fetch('http://localhost:3000/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password })
+        method: 'POST',// sunucuya yeni bilgi vermeye gidiyo
+        headers: { 'Content-Type': 'application/json' },// sunucuya json formatında veri var diyo
+        body: JSON.stringify({ name, email, password })//elimizdeki veriyi onun formatında veriyoruz
       });
 
       const result = await response.json();
@@ -125,3 +125,8 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+
+//Paketle: İsim, email ve şifreyi paketler (JSON.stringify)
+//Gönder: http://localhost:3000/register adresine postalar (fetch).
+//bekle: Sunucu veritabanına kaydedip cevap verene kadar bekler (await).
+// sonuç kaydoldun , bu mail zaten var, hata

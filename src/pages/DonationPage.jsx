@@ -96,3 +96,13 @@ const DonationPage = () => {
 };
 
 export default DonationPage;
+
+//Bu kodda veriler sabit değil, sunucudan fetch ile gelir ve butona basıldığında handleDonate fonksiyonu çalışır.
+
+//handleDonate Şu işlemleri yönetir:
+
+//Doğrulama: Kullanıcı geçerli bir tutar girdi mi?
+
+//letişim: Banka veya sunucu (Backend) ile konuşup "Bu parayı çek" emrini verir.
+
+//Geri Bildirim: Kullanıcıya "İşlem Başarılı" veya "Hata Oluştu" mesajını gösterir.

@@ -10,4 +10,4 @@ createRoot(document.getElementById('root')).render(
 )
 
 //bu dosyanın tek bir amacı var o da yazdığımız tüm react dosyalarını
-// safarinin anlıcağı şekilde html e çevirmek ve ekrana basmak
+// safarinin anlıcağı şekilde html e çevirmek ve ekrana basmak bunu dom yapar
