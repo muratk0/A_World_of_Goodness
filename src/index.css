@@ -1,4 +1,6 @@
-/* 1. GENEL SIFIRLAMA VE ARKA PLAN */
+/* =========================================
+   1. GENEL AYARLAR (RESET & BODY)
+   ========================================= */
 * {
     margin: 0;
     padding: 0;
@@ -9,9 +11,12 @@ body {
     background-color: #f7efec;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    line-height: 1.6;
 }
 
-/* 2. NAVBAR (Hem Donation hem Login için tek tanım) */
+/* =========================================
+   2. NAVBAR (MENÜ)
+   ========================================= */
 .navbar {
     background-color: rgba(20, 1, 1, 0.08); 
     backdrop-filter: blur(5px);
@@ -28,17 +33,27 @@ body {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
 }
 
-.nav-left a, .nav-right a, .center span {
+.nav-left {
+    display: flex;
+    gap: 25px;
+}
+
+/* Linkler ve Logo Yazısı Ortak Stil */
+.nav-left a, 
+.nav-right a, 
+.center span {
     color: #000000 !important;
     font-size: 1.2rem;
     font-weight: 500;
     text-decoration: none;
-    transition: 0.8s;
+    transition: 0.8s; /* İsteğin üzerine süreyi korudum */
 }
 
-.nav-left {
-    display: flex;
-    gap: 25px;
+/* Hover Efektleri */
+.nav-left a:hover, 
+.nav-right a:hover, 
+.center:hover span {
+    color: rgb(121, 111, 111) !important;
 }
 
 .center {
@@ -56,11 +71,41 @@ body {
     object-fit: cover;
 }
 
-a:hover, .center:hover {
-    color: rgb(121, 111, 111) !important;
+/* =========================================
+   3. ORTAK BİLEŞENLER (CAM EFEKTİ & BUTONLAR)
+   ========================================= */
+
+/* Cam Efekti (Glassmorphism) Temel Yapı */
+/* Bu sınıfı doğrudan HTML'de kullanabilirsin veya aşağıda extend ettik */
+.glass-base, .box, .history-card-glass, .empty-state-glass, .error-box {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
 }
 
-/* 3. KUTU (BOX) YAPISI - Hem Bağış Hem Etkinlik İçin Ortak */
+/* Yeşil Buton Teması */
+.btn-aid, .payment-form .btn-submit, .btn-submit {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 25px; /* Yuvarlak hatlar */
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3);
+}
+
+.btn-aid:hover, .payment-form .btn-submit:hover, .btn-submit:hover {
+    background-color: #219150;
+    transform: translateY(-2px);
+}
+
+/* =========================================
+   4. BAĞIŞ KARTLARI (DONATION CARD)
+   ========================================= */
 .donation .box-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
@@ -69,11 +114,7 @@ a:hover, .center:hover {
 }
 
 .box {
-    background-color: rgba(255, 255, 255, 0.6); 
-    backdrop-filter: blur(10px); 
-    border: 1px solid rgba(255, 255, 255, 0.5); 
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); 
-    border-radius: 15px; 
+    background-color: rgba(255, 255, 255, 0.6); /* Saydamlık: 0.6 */
     overflow: hidden; 
     transition: transform 0.3s ease;
     display: flex;
@@ -91,11 +132,7 @@ a:hover, .center:hover {
     display: block;
 }
 
-/* Yazı ve Detay Ayarları */
-.box h3, .box p, .card-details {
-    padding: 0 20px;
-}
-
+.box h3, .box p, .card-details { padding: 0 20px; }
 .box h3 { margin-top: 15px; font-size: 1.2rem; color: #333; }
 .box p { margin-bottom: 10px; color: #555; }
 
@@ -120,27 +157,116 @@ a:hover, .center:hover {
 .price { font-weight: bold; font-size: 1.1rem; color: #333; }
 .stock { color: #e74c3c; font-weight: bold; font-size: 0.9rem; }
 
-/* Alt Buton Alanı */
 .box-bottom {
     padding: 20px;
     border-top: 1px solid rgba(0,0,0,0.05);
     margin-top: auto;
 }
 
-.btn-aid {
-    width: 100%;
-    background-color: #27ae60;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 25px;
-    cursor: pointer;
-    font-weight: bold;
-    box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3);
-    transition: 0.2s;
+.btn-aid { padding: 10px; } /* Buton özel padding */
+
+/* =========================================
+   5. SAYFA BAŞLIKLARI (HEADER)
+   ========================================= */
+.page-header {
+    text-align: center;
+    padding: 60px 10% 30px;
 }
 
-/* 4. LOGIN SAYFASI ÖZEL AYARLARI */
+.page-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.page-header p {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* =========================================
+   6. ANA SAYFA (HOME PAGE) ÖZEL
+   ========================================= */
+.hero-section {
+    height: 85vh;
+    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.4)), 
+                url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=2070');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 0 10%;
+}
+
+.hero-content h1 { font-size: 4.2rem; font-weight: 800; margin-bottom: 25px; letter-spacing: -1px; }
+.hero-content p { font-size: 1.4rem; line-height: 1.6; max-width: 800px; margin: 0 auto 40px; opacity: 0.9; }
+
+/* Metrics Bar */
+.metrics-bar {
+    display: flex;
+    justify-content: space-around;
+    padding: 60px 10%;
+    background: #ffffff;
+    border-bottom: 1px solid #eee;
+}
+
+.metric-item h2 { color: #5cb85c; font-size: 3.2rem; margin-bottom: 5px; }
+.metric-item p { color: #2c3e50; font-size: 1.2rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
+/* Process Section */
+.process-detailed { padding: 120px 10%; background-color: #fdfaf8; }
+.main-title { text-align: center; font-size: 2.8rem; margin-bottom: 80px; color: #2c3e50; }
+
+.text-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 60px;
+}
+
+.text-block h3 { color: #2c3e50; font-size: 1.6rem; margin-bottom: 20px; border-left: 4px solid #5cb85c; padding-left: 15px; }
+.text-block p { color: #555; line-height: 1.8; font-size: 1.1rem; text-align: justify; }
+
+/* Mission Extended */
+.mission-extended { padding: 120px 10%; background: white; }
+.mission-content { display: flex; align-items: center; gap: 100px; flex-wrap: wrap; }
+.mission-visual { flex: 1; min-width: 400px; }
+.mission-visual img { width: 100%; border-radius: 10px; box-shadow: 30px 30px 0px #ecdcd6; }
+
+.mission-prose { flex: 1.2; min-width: 400px; }
+.mission-prose h2 { font-size: 2.8rem; color: #2c3e50; margin-bottom: 30px; }
+.mission-prose p { font-size: 1.2rem; line-height: 1.9; color: #444; margin-bottom: 25px; }
+
+.btn-text-link { color: #5cb85c; font-weight: 700; text-decoration: none; font-size: 1.1rem; border-bottom: 2px solid transparent; transition: 0.3s; }
+.btn-text-link:hover { border-bottom: 2px solid #5cb85c; }
+
+/* Ghost Buttons (Şeffaf Butonlar) */
+.btn-main, .btn-secondary { 
+    background: transparent !important;
+    border: 2px solid white !important;
+    color: white !important;
+    padding: 16px 40px; 
+    border-radius: 5px; 
+    font-weight: bold; 
+    text-decoration: none; 
+    transition: 0.3s; 
+    display: inline-block; 
+}
+.btn-secondary { margin-left: 20px; }
+.btn-main:hover, .btn-secondary:hover { 
+    background: rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+    transform: translateY(-3px);
+}
+
+/* =========================================
+   7. GİRİŞ SAYFASI (LOGIN PAGE)
+   ========================================= */
 .login-page {
     background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), 
                 url("images/YARDIM.jpeg"); 
@@ -161,6 +287,7 @@ a:hover, .center:hover {
 }
 
 .login-box {
+    /* Glass efekti eklemeden sade beyaz */
     background: rgba(255, 255, 255, 0.95);
     width: 100%;
     max-width: 400px;
@@ -170,12 +297,7 @@ a:hover, .center:hover {
 }
 
 .tabs { display: flex; border-bottom: 1px solid #eee; }
-
-.tab-btn {
-    flex: 1; padding: 15px; border: none; background: #fdfdfd;
-    cursor: pointer; font-weight: 600; color: #888; transition: 0.3s;
-}
-
+.tab-btn { flex: 1; padding: 15px; border: none; background: #fdfdfd; cursor: pointer; font-weight: 600; color: #888; transition: 0.3s; }
 .tab-btn.active { background: white; color: #333; border-bottom: 3px solid #5cb85c; }
 
 .login-form { padding: 30px; animation: fadeIn 0.4s ease-in-out; }
@@ -184,126 +306,13 @@ a:hover, .center:hover {
     display: flex; align-items: center; border: 1px solid #ddd;
     border-radius: 6px; padding: 10px 15px; margin-top: 8px; margin-bottom: 20px;
 }
-
 .input-group input { border: none; outline: none; width: 100%; background: transparent; }
 
-.btn-submit {
-    background-color: #5cb85c; color: white; width: 100%; padding: 14px;
-    border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.4s;
-}
+.btn-submit { padding: 14px; border-radius: 6px; } /* Login butonu özel padding */
 
-/* 5. ANİMASYONLAR VE YARDIMCI SINIFLAR */
-.hidden { display: none !important; }
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(5px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-/* Sayfa Başlığı ve Açıklama Alanı */
-.page-header {
-    text-align: center;
-    padding: 60px 10% 30px; /* Üstten geniş, yanlardan %10, alttan az boşluk */
-}
-
-.page-header h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #2c3e50;
-    margin-bottom: 15px;
-}
-
-.page-header p {
-    font-size: 1.1rem;
-    color: #666;
-    line-height: 1.6;
-    max-width: 700px;
-    margin: 0 auto; /* Metni tam merkeze sabitler */
-}
-/* --- PROFESYONEL ANA SAYFA STİLLERİ --- */
-
-/* Hero Section - Görseldeki derinlik korunuyor */
-.hero-section {
-    height: 85vh;
-    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.4)), 
-                url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=2070');
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
-    padding: 0 10%;
-}
-
-.hero-content h1 { font-size: 4.2rem; font-weight: 800; margin-bottom: 25px; letter-spacing: -1px; }
-.hero-content p { font-size: 1.4rem; line-height: 1.6; max-width: 800px; margin: 0 auto 40px; opacity: 0.9; }
-
-/* Metrics Bar - Sade ve net */
-.metrics-bar {
-    display: flex;
-    justify-content: space-around;
-    padding: 60px 10%;
-    background: #ffffff;
-    border-bottom: 1px solid #eee;
-}
-
-.metric-item h2 { color: #5cb85c; font-size: 3.2rem; margin-bottom: 5px; }
-.metric-item p { color: #2c3e50; font-size: 1.2rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-
-/* Process Section - Bol metinli alan */
-.process-detailed { padding: 120px 10%; background-color: #fdfaf8; }
-.main-title { text-align: center; font-size: 2.8rem; margin-bottom: 80px; color: #2c3e50; }
-
-.text-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 60px;
-}
-
-.text-block h3 { color: #2c3e50; font-size: 1.6rem; margin-bottom: 20px; border-left: 4px solid #5cb85c; padding-left: 15px; }
-.text-block p { color: #555; line-height: 1.8; font-size: 1.1rem; text-align: justify; }
-
-/* Mission Extended - Hikaye anlatımı */
-.mission-extended { padding: 120px 10%; background: white; }
-.mission-content { display: flex; align-items: center; gap: 100px; flex-wrap: wrap; }
-.mission-visual { flex: 1; min-width: 400px; }
-.mission-visual img { width: 100%; border-radius: 10px; box-shadow: 30px 30px 0px #ecdcd6; }
-
-.mission-prose { flex: 1.2; min-width: 400px; }
-.mission-prose h2 { font-size: 2.8rem; color: #2c3e50; margin-bottom: 30px; }
-.mission-prose p { font-size: 1.2rem; line-height: 1.9; color: #444; margin-bottom: 25px; }
-
-.btn-text-link { color: #5cb85c; font-weight: 700; text-decoration: none; font-size: 1.1rem; border-bottom: 2px solid transparent; transition: 0.3s; }
-.btn-text-link:hover { border-bottom: 2px solid #5cb85c; }
-
-/* Butonlar */
-/* Butonlar - Her ikisi de Beyaz ve Şeffaf (Ghost Style) */
-.btn-main, .btn-secondary { 
-    background: transparent !important; /* Arka planı şeffaf yaptık */
-    border: 2px solid white !important;   /* Beyaz çerçeve ekledik */
-    color: white !important;             /* Yazı rengini beyaz yaptık */
-    padding: 16px 40px; 
-    border-radius: 5px; 
-    font-weight: bold; 
-    text-decoration: none; 
-    transition: 0.3s; 
-    display: inline-block; 
-}
-
-/* İkinci butona soldan boşluk veriyoruz */
-.btn-secondary { 
-    margin-left: 20px; 
-}
-
-/* Üzerine gelince (Hover) Efekti */
-.btn-main:hover, .btn-secondary:hover { 
-    background: rgba(255, 255, 255, 0.2) !important; /* Hafif bir beyaz dolgu */
-    color: white !important;
-    transform: translateY(-3px); /* Hafif yukarı kalkma efekti */
-}
-
-/* --- PAYMENT MODAL STYLES --- */
+/* =========================================
+   8. ÖDEME MODALI (PAYMENT MODAL)
+   ========================================= */
 .modal-overlay {
     position: fixed;
     top: 0; left: 0;
@@ -317,8 +326,8 @@ a:hover, .center:hover {
 }
 
 .modal-box {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.95); /* Saydamlık: 0.95 */
+    backdrop-filter: blur(10px); /* Glass base var ama override ettik */
     width: 90%;
     max-width: 450px;
     padding: 40px;
@@ -342,14 +351,8 @@ a:hover, .center:hover {
     padding-bottom: 10px;
 }
 
-.payment-form .input-group {
-    margin-bottom: 20px;
-}
-
-.form-row {
-    display: flex;
-    gap: 20px;
-}
+.payment-form .input-group { margin-bottom: 20px; border: none; padding: 0; }
+.form-row { display: flex; gap: 20px; }
 
 .payment-form input {
     width: 100%;
@@ -362,19 +365,83 @@ a:hover, .center:hover {
 
 .payment-form .btn-submit {
     margin-top: 10px;
-    background-color: #27ae60;
-    color: white;
-    width: 100%;
     padding: 15px;
-    border: none;
     border-radius: 10px;
+}
+
+/* =========================================
+   9. İŞLEM GEÇMİŞİ (TRANSACTION HISTORY)
+   ========================================= */
+.history-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-bottom: 50px;
+}
+
+.history-card-glass, .empty-state-glass, .error-box {
+    background-color: rgba(255, 255, 255, 0.7); /* Saydamlık: 0.7 */
+    padding: 30px;
+    margin-top: 20px;
+}
+
+.history-list { list-style: none; padding: 0; margin: 0; }
+.history-item {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+}
+.history-item:last-child { border-bottom: none; }
+.history-item:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.item-info { display: flex; flex-direction: column; }
+.item-name { font-size: 1.2rem; color: #333; font-weight: 600; }
+.item-date { color: #888; font-size: 0.9rem; margin-top: 5px; }
+
+.item-amount-badge {
+    background-color: #e8f8f5;
+    color: #27ae60;
     font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
+    font-size: 1.1rem;
+    padding: 8px 15px;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(39, 174, 96, 0.1);
 }
 
-.payment-form .btn-submit:hover {
-    background-color: #219150;
-    transform: translateY(-2px);
+.loading-state { text-align: center; font-size: 1.2rem; color: #666; margin-top: 50px; }
+
+.empty-state-glass {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.empty-state-glass p { font-size: 1.2rem; color: #555; margin-bottom: 15px; }
+
+.error-box {
+    text-align: center;
+    color: #e74c3c;
+    border: 1px solid #fadbd8;
+    background: #fdedec; /* Hata rengi, glass base üzerine ezer */
+    max-width: 500px;
+    margin: 50px auto;
 }
 
+.history-page-wrapper { padding: 2rem 7%; }
+
+/* =========================================
+   10. ANİMASYONLAR VE YARDIMCI SINIFLAR
+   ========================================= */
+.hidden { display: none !important; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}

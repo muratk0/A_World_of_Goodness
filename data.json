@@ -148,6 +148,38 @@
       "email": "test1@test.com",
       "password": "123",
       "history": []
+    },
+    {
+      "id": 1768304685244,
+      "name": "burak",
+      "email": "burak@gmail.com",
+      "password": "123456",
+      "history": [
+        {
+          "id": 1768304725305,
+          "date": "13.01.2026",
+          "productName": "Boat Donation",
+          "amount": 1
+        },
+        {
+          "id": 1768306815392,
+          "date": "13.01.2026",
+          "productName": "Notebook Donation",
+          "amount": 1
+        },
+        {
+          "id": 1768311263769,
+          "date": "13.01.2026",
+          "productName": "Shoe Donation",
+          "amount": 1
+        },
+        {
+          "id": 1768312220097,
+          "date": "13.01.2026",
+          "productName": "Shoe Donation",
+          "amount": 1
+        }
+      ]
     }
   ],
   "products": [
@@ -164,7 +196,7 @@
       "category": "SHOE",
       "title": "Shoe Donation",
       "price": "₺2300.00",
-      "stock": 140,
+      "stock": 138,
       "img": "/images/ayakkabı.png"
     },
     {
@@ -172,7 +204,7 @@
       "category": "BOAT",
       "title": "Boat Donation",
       "price": "₺2000.00",
-      "stock": 149,
+      "stock": 148,
       "img": "/images/bot.png"
     },
     {
@@ -188,7 +220,7 @@
       "category": "NOTEBOOK",
       "title": "Notebook Donation",
       "price": "₺150.00",
-      "stock": 500,
+      "stock": 499,
       "img": "/images/defter.png"
     },
     {

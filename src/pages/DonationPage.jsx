@@ -8,10 +8,25 @@ const DonationPage = () => {
   const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:3000/products')
-      .then(res => res.json())
-      .then(data => setDonations(data))
-      .catch(err => console.error("Ürünler çekilemedi:", err));
+    // 1. Yardımcı bir asenkron fonksiyon tanımlıyoruz
+    const fetchProducts = async () => {
+      try {
+        // Bekle (await) ve veriyi çek
+        const res = await fetch('http://localhost:3000/products');
+        
+        // Bekle (await) ve JSON'a çevir
+        const data = await res.json();
+        
+        // Hafızaya at
+        setDonations(data);
+      } catch (err) {
+        // Hata varsa yakala
+        console.error("Ürünler çekilemedi:", err);
+      }
+    };
+
+    // 2. Fonksiyonu hemen çalıştırıyoruz
+    fetchProducts();
   }, []);
 
   // "Aid" butonuna basınca modal'ı açar
@@ -58,7 +73,7 @@ const DonationPage = () => {
     <main className="donation">
       <div className="page-header">
         <h1>Extend a Helping Hand</h1>
-        <p>A small donation can trigger a big change.</p>
+        <p>Even the smallest donation can spark a massive wave of hope. Your contribution today triggers the big change we wish to see in the world.</p>
       </div>
 
       <section className="box-container">

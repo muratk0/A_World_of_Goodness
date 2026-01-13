@@ -62,8 +62,6 @@ const writeData = (data) => {
 
 // --- ROTALAR (API ENDPOINTS) ---
 
-
-
 // 1. Ürünleri Listele
 
 app.get('/products', (req, res) => {
@@ -82,7 +80,7 @@ app.post('/register', (req, res) => {
 
     console.log("Kayıt isteği geldi:", req.body); // Terminalde görmek için
 
-    
+
 
     const { name, email, password } = req.body;
 
@@ -118,7 +116,7 @@ app.post('/register', (req, res) => {
 
     writeData(data);
 
-    
+
 
     console.log(`Yeni Kayıt Yapıldı: ${email}`);
 
@@ -170,7 +168,7 @@ app.post('/donate', (req, res) => {
 
     const { userId, productId, amount } = req.body;
 
-    
+
 
     // Veriyi oku
 
@@ -198,7 +196,7 @@ app.post('/donate', (req, res) => {
 
     // DİKKAT: Hem Number hem String olarak kontrol ediyoruz (Garanti olsun diye)
 
-    const product = data.products.find(p => p.id == productId); 
+    const product = data.products.find(p => p.id == productId);
 
     const user = data.users.find(u => u.id == userId);
 
@@ -218,7 +216,7 @@ app.post('/donate', (req, res) => {
 
     }
 
-    
+
 
     if (product.stock < amount) {
 
@@ -288,7 +286,22 @@ app.post('/donate', (req, res) => {
 
 
 
+
+// 5. Kullanıcı Bilgisi ve Geçmişi Getir
+app.get('/user/:id', (req, res) => {
+    const userId = req.params.id; // URL'den gelen ID
+    const data = readData();
+    const user = data.users.find(u => u.id == userId);
+
+    if (user) {
+        res.json({ success: true, user });
+    } else {
+        res.json({ success: false, message: "Kullanıcı bulunamadı." });
+    }
+});
+
 app.listen(PORT, () => {
+
 
     console.log(`MODERN SERVER HAZIR: http://localhost:${PORT}`);
 

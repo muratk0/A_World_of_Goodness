@@ -15,6 +15,7 @@ const HomePage = () => {
             the world a better, more compassionate place for everyone.
           </p>
           <div className="hero-btns">
+            {/* link kullanmamızın sebebi akıcı olması a hrefle akıcı olmaz */}
             <Link to="/donation" className="btn-main">Donate Now</Link>
             <Link to="/events" className="btn-secondary">Explore Events</Link>
           </div>
@@ -76,7 +77,7 @@ const HomePage = () => {
       <section className="mission-extended">
         <div className="mission-content">
           <div className="mission-visual">
-            <img src="/images/grupuye.jpeg" alt="Our Team" />
+            <img src="/images/grupuye.jpg" alt="Our Team" />
           </div>
           <div className="mission-prose">
             <h2>Our Story & Global Vision</h2>
